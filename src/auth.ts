@@ -3,9 +3,9 @@ import Google from "next-auth/providers/google";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
-  providers: [Google()],
+  providers: [Google],
   callbacks: {
-    authorized({ auth, request }: { auth: any; request: any }) {
+    authorized({ auth, request }: any) {
       const pathname = request.nextUrl.pathname;
       const isProductManagementPage =
         /^\/products\/[^/]+\/(edit|delete)$/.test(pathname);
