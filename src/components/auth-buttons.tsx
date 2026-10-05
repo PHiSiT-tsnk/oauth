@@ -8,7 +8,7 @@ type AuthButtonsProps = {
 export function AuthButtons({ isLoggedIn, userName }: AuthButtonsProps) {
   if (isLoggedIn) {
     return (
-      <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+      <div>
         <span>สวัสดี {userName ?? "ผู้ใช้งาน"}</span>
         <form
           action={async () => {

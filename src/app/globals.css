@@ -1,26 +1,205 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --border-color: #e2e8f0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding: 2rem 1rem;
+}
+
+/* คอนเทนเนอร์หลัก */
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  border: 1px solid var(--border-color);
+}
+
+/* แถบหัวข้อด้านบน */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.025em;
+}
+
+/* ปุ่มเข้าสู่ระบบ / ออกจากระบบ */
+header form button,
+button[type="submit"] {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+header form button:hover,
+button[type="submit"]:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+header span {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-right: 0.75rem;
+  font-weight: 500;
+}
+
+/* รายการสินค้า (Articles) */
+article[data-testid="product"] {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+article[data-testid="product"]:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+article[data-testid="product"] h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+article[data-testid="product"] p:first-of-type {
+  color: var(--text-muted);
+  font-size: 0.925rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ราคาสินค้า */
+article[data-testid="product"] p:last-of-type {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #059669;
+}
+
+/* แถบปุ่ม แก้ไข / ลบ */
+article[data-testid="product"] div {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+article[data-testid="product"] a {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+/* ปุ่มแก้ไข */
+article[data-testid="product"] a[href*="/edit"] {
+  background-color: #eff6ff;
+  color: var(--primary);
+  border: 1px solid #bfdbfe;
+}
+
+article[data-testid="product"] a[href*="/edit"]:hover {
+  background-color: #dbeafe;
+}
+
+/* ปุ่มลบ */
+article[data-testid="product"] a[href*="/delete"] {
+  background-color: #fef2f2;
+  color: var(--danger);
+  border: 1px solid #fecaca;
+}
+
+article[data-testid="product"] a[href*="/delete"]:hover {
+  background-color: #fee2e2;
+}
+
+/* สไตล์สำหรับหน้าฟอร์ม แก้ไข / ยืนยันลบ */
+form > div {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ลิงก์ยกเลิกในหน้าฟอร์ม */
+form a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-left: 1rem;
+  font-size: 0.925rem;
+}
+
+form a:hover {
+  color: var(--text-main);
 }

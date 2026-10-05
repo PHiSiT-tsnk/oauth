@@ -48,7 +48,7 @@ export function getProduct(id: string) {
 
 export function updateProduct(
   id: string,
-  values: Pick<Product, "name" | "price" | "description">,
+  values: Pick<Product, "name" | "price" | "description">
 ) {
   const product = getProduct(id);
   if (!product) {

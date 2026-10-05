@@ -23,7 +23,6 @@ export async function updateProductAction(id: string, formData: FormData) {
   if (!name || !description) {
     throw new Error("กรุณากรอกข้อมูลให้ครบ");
   }
-
   if (!Number.isFinite(price) || price < 0) {
     throw new Error("ราคาไม่ถูกต้อง");
   }

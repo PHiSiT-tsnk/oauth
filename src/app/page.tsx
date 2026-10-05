@@ -9,37 +9,19 @@ export default async function HomePage() {
   const isLoggedIn = Boolean(session?.user);
 
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "2rem",
-        }}
-      >
+    <main>
+      <header>
         <h1>สินค้า</h1>
         <AuthButtons isLoggedIn={isLoggedIn} userName={session?.user?.name} />
       </header>
-
-      <div style={{ display: "grid", gap: "1rem" }}>
+      <div>
         {products.map((product) => (
-          <article
-            key={product.id}
-            data-testid="product"
-            style={{
-              border: "1px solid #ccc",
-              padding: "1rem",
-              borderRadius: "8px",
-            }}
-          >
+          <article key={product.id} data-testid="product">
             <h2>{product.name}</h2>
             <p>{product.description}</p>
-            <p>
-              <strong>{product.price.toLocaleString("th-TH")} บาท</strong>
-            </p>
+            <p>฿{product.price.toLocaleString("th-TH")}</p>
             {isLoggedIn && (
-              <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem" }}>
+              <div>
                 <Link href={`/products/${product.id}/edit`}>แก้ไข</Link>
                 <Link href={`/products/${product.id}/delete`}>ลบ</Link>
               </div>
